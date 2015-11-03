@@ -8,7 +8,7 @@ public class SmallestMultiple {
 
     public SmallestMultiple() {
         primeNumberDivideAnyNumber = false;
-        primeNumber = 2;
+        primeNumber = 1;
     }
 
     public int getMinimumMultipleCommonUntil(int number) {
@@ -24,24 +24,30 @@ public class SmallestMultiple {
         int[] numbers = makeArrayWithNumbersUntil(number);
         boolean reachedMinimum = false;
         int minimumMultiple = 1;
+        primeNumber = 2;
 
         while (!reachedMinimum) {
 
             primeNumberDivideAnyNumber = isPrimeNumberDivisorOfAnyNumber(numbers);
-            minimumMultiple = updateMinimumMultipleCommon(minimumMultiple);
 
-            //When reached minimum, all numbers will be one
-            int currentMultipleNumber = 1;
+            if (primeNumberDivideAnyNumber) {
+                // When reached minimum, all numbers will be one
+                // So if we get all numbers and multiply one each other
+                // the result will be one
+                int currentMultipleNumber = 1;
 
-            for (int i = 0; i < numbers.length; i++) {
-                if (numbers[i] % primeNumber == 0) {
-                    numbers[i] = numbers[i] / primeNumber;
+                for (int i = 0; i < numbers.length; i++) {
+                    if (numbers[i] % primeNumber == 0) {
+                        numbers[i] = numbers[i] / primeNumber;
+                    }
+
+                    currentMultipleNumber = currentMultipleNumber * numbers[i];
                 }
 
-                currentMultipleNumber = currentMultipleNumber * numbers[i];
+                reachedMinimum = (currentMultipleNumber == 1);
+                minimumMultiple = updateMinimumMultipleCommon(minimumMultiple);
             }
 
-            reachedMinimum = (currentMultipleNumber == 1);
             updateCurrentPrimeNumber();
         }
 
@@ -58,13 +64,12 @@ public class SmallestMultiple {
     }
 
     private void updateCurrentPrimeNumber() {
-        if (primeNumberDivideAnyNumber) {
+        if (!primeNumberDivideAnyNumber) {
             primeNumber++;
 
             while (!isPrime(primeNumber)) {
                 primeNumber++;
             }
-
         }
 
     }
@@ -80,13 +85,8 @@ public class SmallestMultiple {
     }
 
     private int updateMinimumMultipleCommon(int minimumMultiple) {
-        if (!primeNumberDivideAnyNumber) {
-            minimumMultiple = minimumMultiple * primeNumber;
-        }
-        return minimumMultiple;
+        return minimumMultiple * primeNumber;
     }
-
-
 
     private int resetPrimeNumber() {
         return 2;

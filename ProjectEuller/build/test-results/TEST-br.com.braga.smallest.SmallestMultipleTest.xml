@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="br.com.braga.smallest.SmallestMultipleTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2015-11-01T04:50:55" hostname="Erics-MBP" time="86.761">
+  <properties/>
+  <testcase name="forFourNumberSmallestMultipleShouldBeTwelve" classname="br.com.braga.smallest.SmallestMultipleTest" time="86.761"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
